@@ -2,6 +2,7 @@ package com.pl.britenet.util;
 
 import com.pl.britenet.model.Credits;
 import com.pl.britenet.model.Movie;
+import com.pl.britenet.model.ReviewResultsPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -20,8 +21,8 @@ public class MovieFinder {
 
     public static Movie getById(Integer movieId) {
         Movie movie = restTemplate.getForObject(
-                "https://api.themoviedb.org/3/movie/"+ movieId
-                        +"?api_key="+ API_KEY +"&language=en-US", Movie.class);
+                "https://api.themoviedb.org/3/movie/" + movieId
+                        + "?api_key=" + API_KEY + "&language=en-US", Movie.class);
         return movie;
     }
 
@@ -30,5 +31,16 @@ public class MovieFinder {
                 "https://api.themoviedb.org/3/movie/" + movieId + "/credits?api_key=" + API_KEY,
                 Credits.class);
         return credits;
+    }
+
+    public ReviewResultsPage getReviews(Integer movieId) {
+        ReviewResultsPage reviews = restTemplate.getForObject(
+                "https://api.themoviedb.org/3/movie/" +
+                        movieId +
+                        "/reviews?api_key="
+                        + API_KEY
+                        + "&language=en-US&page=1",
+                ReviewResultsPage.class);
+        return reviews;
     }
 }

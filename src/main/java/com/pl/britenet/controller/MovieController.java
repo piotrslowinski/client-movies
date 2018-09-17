@@ -2,6 +2,7 @@ package com.pl.britenet.controller;
 
 import com.pl.britenet.model.Credits;
 import com.pl.britenet.model.Movie;
+import com.pl.britenet.model.ReviewResultsPage;
 import com.pl.britenet.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,11 @@ public class MovieController {
 
     @GetMapping("/{movieId}/credits")
     public Credits getCreditsByMOvieId(@PathVariable Integer movieId) {
-        return movieService.getCreditsByMOvieId(movieId);
+        return movieService.getCreditsByMovieId(movieId);
+    }
+
+    @GetMapping("/{movieId}/reviews")
+    public ReviewResultsPage getMovieReview(@PathVariable Integer movieId) {
+        return movieService.getReviewsByMovieId(movieId);
     }
 }

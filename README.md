@@ -36,6 +36,6 @@ This app sends requests to TheMovie DB API and provides it's responses with it's
 
 ...
 
-    GET/movies/:movieId/review
+    GET/movies/:movieId/reviews
     
 ...
