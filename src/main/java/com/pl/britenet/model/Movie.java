@@ -26,6 +26,10 @@ public class Movie {
     public Movie() {
     }
 
+    public Movie(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }

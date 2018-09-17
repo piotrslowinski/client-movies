@@ -1,8 +1,11 @@
 package com.pl.britenet.util;
 
+import java.util.Optional;
+
 import com.pl.britenet.model.Credits;
 import com.pl.britenet.model.Movie;
 import com.pl.britenet.model.ReviewResultsPage;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -19,21 +22,21 @@ public class MovieFinder {
         this.restTemplate = restTemplate;
     }
 
-    public static Movie getById(Integer movieId) {
+    public static Optional<Movie> getById(Integer movieId) {
         Movie movie = restTemplate.getForObject(
                 "https://api.themoviedb.org/3/movie/" + movieId
                         + "?api_key=" + API_KEY + "&language=en-US", Movie.class);
-        return movie;
+        return Optional.of(movie);
     }
 
-    public static Credits getCredits(Integer movieId) {
+    public static Optional<Credits> getCredits(Integer movieId) {
         Credits credits = restTemplate.getForObject(
                 "https://api.themoviedb.org/3/movie/" + movieId + "/credits?api_key=" + API_KEY,
                 Credits.class);
-        return credits;
+        return Optional.of(credits);
     }
 
-    public ReviewResultsPage getReviews(Integer movieId) {
+    public static Optional<ReviewResultsPage> getReviews(Integer movieId) {
         ReviewResultsPage reviews = restTemplate.getForObject(
                 "https://api.themoviedb.org/3/movie/" +
                         movieId +
@@ -41,6 +44,6 @@ public class MovieFinder {
                         + API_KEY
                         + "&language=en-US&page=1",
                 ReviewResultsPage.class);
-        return reviews;
+        return Optional.of(reviews);
     }
 }
